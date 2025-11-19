@@ -24,7 +24,8 @@ app.use(session({
   cookie: { 
     secure: true,
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: 'lax',
+    maxAge: 600000  // 10 minutes (600000ms) - enough time to complete OAuth flow
   }
 }));
 app.use(passport.initialize());
