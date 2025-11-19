@@ -12,11 +12,12 @@ import passport from 'passport';
 const routes = require('./routes/index');
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'mattermostApp', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'qteyApp', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
