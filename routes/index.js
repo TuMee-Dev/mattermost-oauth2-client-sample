@@ -10,7 +10,7 @@ auth.setUrl(config.get("mattermost_url")); //only for testing purposes
 /* GET home page. */
 router.get('/', (req, res, next) => {
   if (!req.isAuthenticated()) {
-      return res.render('index', { title: 'Mattermost OAuth 2.0 Client Sample App' });
+      return res.render('index', { title: 'Qtey DataSync to Mamty OAuth 2.0 Client Sample App' });
     }
   
     return res.redirect('/user');
@@ -25,13 +25,13 @@ router.get('/oauth/callback', (req, res, next) => {
     }
     if (req.query.error) {
       return res.render('oauth', {
-        title: 'Mattermost Sample App',
+        title: 'Qtey DataSync',
         error: req.query.error
       });
     }
     if (!user) {
       return res.render('oauth', {
-        title: 'Mattermost Sample App',
+        title: 'Qtey DataSync',
         error:  'User failed'
       });
     }
@@ -40,7 +40,7 @@ router.get('/oauth/callback', (req, res, next) => {
       if (err) { return next(err); }
 
       return res.render('oauth', {
-        title: 'Mattermost Sample App',
+        title: 'Qtey DataSync',
         logged: true
       });
     });
@@ -51,7 +51,7 @@ router.get('/oauth/callback', (req, res, next) => {
 router.get('/user', (req, res) => {
   if (req.isAuthenticated()) {
     return res.render('user', { 
-      title: 'Mattermost Sample App Authenticated',
+      title: 'Qtey DataSync Authenticated',
       user: req.user
     });
   }
