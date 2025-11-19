@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-session({
+app.use(session({
   secret: 'qteyApp', 
   resave: false, 
   saveUninitialized: true,
@@ -26,7 +26,7 @@ session({
     httpOnly: true,
     sameSite: 'lax'
   }
-});
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
