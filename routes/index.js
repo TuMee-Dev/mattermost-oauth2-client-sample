@@ -21,6 +21,9 @@ router.get('/login', passport.authenticate('oauth2'));
 router.get('/oauth/callback', (req, res, next) => {
   passport.authenticate('oauth2', (err, user) => {
     if (err) {
+      console.error('Passport authentication error:', err);
+      console.error('Error stack:', err.stack);
+      console.error('Session data:', req.session);
       return next(err);
     }
     if (req.query.error) {
