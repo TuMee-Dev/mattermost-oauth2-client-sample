@@ -17,7 +17,8 @@ var auth = {
             tokenURL: `${mattermostUrl}/oauth/access_token`,
             clientID: config.get("client_id"),
             clientSecret: config.get("client_secret"),
-            callbackURL: `${config.get("client_url")}/oauth/callback`
+            callbackURL: `${config.get("client_url")}/oauth/callback`,
+            state: true
         }, (accessToken, refreshToken, profile, cb) => {
             profile.accessToken = accessToken;
             profile.refreshToken = refreshToken;
