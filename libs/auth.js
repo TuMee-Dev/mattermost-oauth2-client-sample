@@ -26,6 +26,8 @@ var auth = {
         });
 
         oauth2Strategy.userProfile = (accessToken, done) => {
+            console.log('Access token received:', accessToken);  // ADD THIS
+            console.log('Has _split suffix:', accessToken.endsWith('_split'));  // ADD THIS
             mattermost.setUrl(auth.url);
             mattermost.setToken(accessToken);
             mattermost.getMe().then((data) => {
