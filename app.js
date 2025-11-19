@@ -23,7 +23,8 @@ session({
   saveUninitialized: true,
   cookie: { 
     secure: true,
-    httpOnly: true
+    httpOnly: true,
+    sameSite: 'lax'
   }
 });
 app.use(passport.initialize());
