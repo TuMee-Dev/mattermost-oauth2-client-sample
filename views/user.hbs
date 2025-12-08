@@ -9,7 +9,7 @@
             <div class="disconnected-icon">&#x26A0;</div>
             <h2>Session Revoked</h2>
             <p>Your session has been revoked by the server.</p>
-            <p class="redirect-message">Redirecting to login...</p>
+            <button id="acknowledge-btn" class="acknowledge-btn" onclick="window.location.href='/logout'">OK</button>
         </div>
     </div>
 
@@ -57,9 +57,6 @@
                     clearInterval(tokenCheckInterval);
                     tokenCheckInterval = null;
                     showDisconnectedUI();
-                    setTimeout(function() {
-                        window.location.href = '/logout';
-                    }, 2000);
                 }
             })
             .catch(function(err) {

@@ -86,9 +86,20 @@ a {
   color: #666;
 }
 
-.redirect-message {
-  color: #999;
-  font-style: italic;
+.acknowledge-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background-color 0.2s;
+}
+
+.acknowledge-btn:hover {
+  background-color: #1976d2;
 }
 
 @keyframes fadeIn {
