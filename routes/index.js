@@ -2,6 +2,7 @@ import auth from '../libs/auth';
 import config from '../libs/config';
 import express from 'express';
 import passport from 'passport';
+import {Client4 as mattermost} from 'mattermost-redux/client';
 
 const router = express.Router();
 
@@ -64,6 +65,20 @@ router.get('/user', (req, res) => {
 router.post('/client', (req, res) => {
   auth.setUrl(req.body.url);
   return res.json(true);
+});
+
+router.get('/api/check-token', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.json({ valid: false, reason: 'not_authenticated' });
+  }
+
+  const accessToken = req.user.accessToken;
+  mattermost.setUrl(config.get("mattermost_url"));
+  mattermost.setToken(accessToken);
+
+  mattermost.getMe()
+    .then(() => res.json({ valid: true }))
+    .catch(() => res.json({ valid: false, reason: 'token_invalid' }));
 });
 
 router.get('/logout', (req, res) => {

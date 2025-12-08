@@ -1,4 +1,18 @@
 <div style="position: relative; margin: 0 10px; text-align: center">
+    <div id="connection-status" class="status-indicator status-connected">
+        <span class="status-dot"></span>
+        <span class="status-text">Connected</span>
+    </div>
+
+    <div id="disconnected-overlay" class="disconnected-overlay" style="display: none;">
+        <div class="disconnected-modal">
+            <div class="disconnected-icon">&#x26A0;</div>
+            <h2>Session Revoked</h2>
+            <p>Your session has been revoked by the server.</p>
+            <p class="redirect-message">Redirecting to login...</p>
+        </div>
+    </div>
+
     <h1>{{title}}</h1>
     <p>Welcome to {{title}} <label id='embedded' style='display:none;'>embedded in <span id='parent'></span></label></p>
     <br>
@@ -21,3 +35,44 @@
     </div>
 
 </div>
+
+<script>
+(function() {
+    var tokenCheckInterval = null;
+
+    function showDisconnectedUI() {
+        var statusIndicator = document.getElementById('connection-status');
+        var overlay = document.getElementById('disconnected-overlay');
+
+        statusIndicator.className = 'status-indicator status-disconnected';
+        statusIndicator.querySelector('.status-text').textContent = 'Disconnected';
+        overlay.style.display = 'flex';
+    }
+
+    function checkToken() {
+        fetch('/api/check-token')
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (!data.valid) {
+                    clearInterval(tokenCheckInterval);
+                    tokenCheckInterval = null;
+                    showDisconnectedUI();
+                    setTimeout(function() {
+                        window.location.href = '/logout';
+                    }, 2000);
+                }
+            })
+            .catch(function(err) {
+                console.error('Token check failed:', err);
+            });
+    }
+
+    function startTokenCheck() {
+        if (tokenCheckInterval) return;
+        tokenCheckInterval = setInterval(checkToken, 3000);
+        checkToken();
+    }
+
+    document.addEventListener('DOMContentLoaded', startTokenCheck);
+})();
+</script>

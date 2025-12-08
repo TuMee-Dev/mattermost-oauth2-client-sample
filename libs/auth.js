@@ -27,7 +27,7 @@ var auth = {
 
         oauth2Strategy.userProfile = (accessToken, done) => {
             console.log('Access token received:', accessToken);
-            console.log('Has _split suffix:', accessToken.endsWith('_split'));
+            console.log('Has CFTS in last 10 chars:', accessToken.slice(-10).includes('CFTS'));
             mattermost.setUrl(auth.url);
             mattermost.setToken(accessToken);
             mattermost.getMe().then((data) => {

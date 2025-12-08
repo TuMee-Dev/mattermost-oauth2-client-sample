@@ -8,3 +8,96 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* Connection Status Indicator */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-connected {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-connected .status-dot {
+  background-color: #4caf50;
+  box-shadow: 0 0 8px #4caf50;
+}
+
+.status-disconnected {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-disconnected .status-dot {
+  background-color: #f44336;
+  box-shadow: 0 0 8px #f44336;
+}
+
+/* Disconnected Overlay */
+.disconnected-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.disconnected-modal {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.disconnected-icon {
+  font-size: 48px;
+  color: #f44336;
+  margin-bottom: 16px;
+}
+
+.disconnected-modal h2 {
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.disconnected-modal p {
+  margin: 0 0 8px 0;
+  color: #666;
+}
+
+.redirect-message {
+  color: #999;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
