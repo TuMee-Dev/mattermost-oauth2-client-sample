@@ -18,4 +18,10 @@ if (fs.existsSync(config_file)) {
     console.log('config file not found, using environment variables');
 }
 
+// Debug: log what config values we're using
+console.log('Config values:');
+console.log('  mattermost_url:', nconf.get('mattermost_url'));
+console.log('  client_url:', nconf.get('client_url'));
+console.log('  client_id:', nconf.get('client_id') ? '[SET]' : '[NOT SET]');
+
 export default nconf;
